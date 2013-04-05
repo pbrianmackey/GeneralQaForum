@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GeneralDbModelStoreContainer" CdmEntityContainer="GeneralDbEntities">
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="GeneralDbModel.Question">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="viewCount" ColumnName="viewCount" />
+          <ScalarProperty Name="lastUpdatedDate" ColumnName="lastUpdatedDate" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="closed" ColumnName="closed" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="votes" ColumnName="votes" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="VoteCRUD" FunctionName="GeneralDbModel.Store.VoteCRUD" />
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="GeneralDbModel.Tag">
+        <MappingFragment StoreEntitySet="Tag">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="GeneralDbModel.Answer">
+        <MappingFragment StoreEntitySet="Answer">
+          <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Votes">
+      <EntityTypeMapping TypeName="GeneralDbModel.Vote">
+        <MappingFragment StoreEntitySet="Vote">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="upvote" ColumnName="upvote" />
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

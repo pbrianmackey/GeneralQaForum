@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GeneralDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GeneralDbEntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Questions" EntityType="GeneralDbModel.Question" />
+    <EntitySet Name="Tags" EntityType="GeneralDbModel.Tag" />
+    <EntitySet Name="Votes" EntityType="GeneralDbModel.Vote" />
+    <AssociationSet Name="FK_Vote_Question" Association="GeneralDbModel.FK_Vote_Question">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="Vote" EntitySet="Votes" />
+    </AssociationSet>
+    <FunctionImport Name="VoteCRUD">
+      <Parameter Name="userName" Mode="In" Type="String" />
+      <Parameter Name="questionId" Mode="In" Type="Int32" />
+      <Parameter Name="upvote" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="Answers" EntityType="GeneralDbModel.Answer" />
+  </EntityContainer>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="body" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="tags" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="votes" Type="Int32" />
+    <Property Name="userName" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="closed" Type="Boolean" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="lastUpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="viewCount" Type="Int64" />
+    <NavigationProperty Name="Votes1" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Question" ToRole="Vote" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Vote">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="questionId" Type="Int32" Nullable="false" />
+    <Property Name="upvote" Type="Boolean" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Question" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Vote" ToRole="Question" />
+  </EntityType>
+  <Association Name="FK_Vote_Question">
+    <End Role="Question" Type="GeneralDbModel.Question" Multiplicity="1" />
+    <End Role="Vote" Type="GeneralDbModel.Vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="questionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="questionId" Nullable="false" />
+    <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="createDate" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="lastUpdateDate" Precision="3" />
+  </EntityType>
+</Schema>

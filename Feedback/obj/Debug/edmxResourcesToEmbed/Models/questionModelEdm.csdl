@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GeneralDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GeneralDbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Questions" EntityType="GeneralDbModel.Question" />
+    <FunctionImport Name="VoteCRUD">
+      <Parameter Name="userName" Mode="In" Type="String" />
+      <Parameter Name="questionId" Mode="In" Type="Int32" />
+      <Parameter Name="upvote" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="Tags" EntityType="GeneralDbModel.Tag" />
+    <EntitySet Name="Answers" EntityType="GeneralDbModel.Answer" />
+    <EntitySet Name="Votes" EntityType="GeneralDbModel.Vote" />
+    <AssociationSet Name="FK_Vote_Question" Association="GeneralDbModel.FK_Vote_Question">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="Vote" EntitySet="Votes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="tags" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="votes" />
+    <Property Type="String" Name="userName" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="closed" />
+    <Property Type="DateTime" Name="createDate" Precision="3" />
+    <Property Type="DateTime" Name="lastUpdatedDate" Precision="3" />
+    <Property Type="Int64" Name="viewCount" />
+    <NavigationProperty Name="Votes1" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Question" ToRole="Vote" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="questionId" />
+      <PropertyRef Name="body" />
+      <PropertyRef Name="userName" />
+      <PropertyRef Name="createDate" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="questionId" Nullable="false" />
+    <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="createDate" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="lastUpdateDate" Precision="3" />
+  </EntityType>
+  <EntityType Name="Vote">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="questionId" Nullable="false" />
+    <Property Type="Boolean" Name="upvote" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Question" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Vote" ToRole="Question" />
+  </EntityType>
+  <Association Name="FK_Vote_Question">
+    <End Type="GeneralDbModel.Question" Role="Question" Multiplicity="1" />
+    <End Type="GeneralDbModel.Vote" Role="Vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="questionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

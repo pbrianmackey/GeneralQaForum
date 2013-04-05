@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GeneralDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GeneralDbModelStoreContainer">
+    <EntitySet Name="Answer" EntityType="GeneralDbModel.Store.Answer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Question" EntityType="GeneralDbModel.Store.Question" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tag" EntityType="GeneralDbModel.Store.Tag" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vote" EntityType="GeneralDbModel.Store.Vote" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Vote_Question" Association="GeneralDbModel.Store.FK_Vote_Question">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="Vote" EntitySet="Vote" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="questionId" Type="int" Nullable="false" />
+    <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="createDate" Type="datetime" Nullable="false" />
+    <Property Name="lastUpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="varchar(max)" Nullable="false" />
+    <Property Name="body" Type="varchar(max)" Nullable="false" />
+    <Property Name="tags" Type="varchar(max)" Nullable="false" />
+    <Property Name="votes" Type="int" />
+    <Property Name="userName" Type="varchar(max)" />
+    <Property Name="closed" Type="bit" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="lastUpdatedDate" Type="datetime" />
+    <Property Name="viewCount" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vote">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="questionId" Type="int" Nullable="false" />
+    <Property Name="upvote" Type="bit" />
+    <Property Name="userName" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Vote_Question">
+    <End Role="Question" Type="GeneralDbModel.Store.Question" Multiplicity="1" />
+    <End Role="Vote" Type="GeneralDbModel.Store.Vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="questionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="VoteCRUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="questionId" Type="int" Mode="In" />
+    <Parameter Name="upvote" Type="bit" Mode="In" />
+  </Function>
+</Schema>

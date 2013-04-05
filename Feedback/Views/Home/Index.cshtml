@@ -1,0 +1,18 @@
+﻿@model System.Linq.IOrderedQueryable<Feedback.Models.Question>
+@{
+    ViewBag.Title = "HottestQuestions";
+}
+
+<h2>Hottest Questions</h2>
+
+<table>
+@foreach (var question in Model)
+{
+    <tr>
+        <td>@question.votes</td>
+        <td>@Html.ActionLink(@question.title,"Index","Question",new {id = @question.id},null)</td>
+    </tr>
+}
+    </table>
+
+

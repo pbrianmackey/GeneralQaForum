@@ -1,0 +1,82 @@
+﻿@model Feedback.Models.Question
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    $(function() {        
+        $('#upvote').click(function() {
+            $.ajax({
+                url: "/Question/UpdateVote",
+                type: "POST",
+                data: {
+                    questionId: $('#questionId').html(),
+                    voteCount: 1,
+                    userName: $('#userName').html()
+                }
+            }).done(function (updatedVoteCount) {
+                $('#voteCount').html(updatedVoteCount);
+            });
+        });
+        
+        $('#downvote').click(function () {            
+            $.ajax({
+                url: "/Question/UpdateVote",
+                type: "POST",
+                data: {
+                    questionId: $('#questionId').html(),
+                    voteCount: -1,
+                    userName: $('#userName').html()
+                }
+            }).done(function (updatedVoteCount) {
+                $('#voteCount').html(updatedVoteCount);
+            });
+        });
+        
+    });
+</script>
+
+<h2>@Model.title</h2>
+<div>Created On: @Model.createDate</div>
+<div>Last Updated On: @Model.lastUpdatedDate</div>
+<div>Views: @Model.viewCount</div>
+
+<div id="questionId" style="visibility: hidden;">@Model.id</div>
+<div id="userName" style="visibility: hidden;">@Environment.UserName</div>
+<table>
+    <tr>
+        <td>
+            <div>
+                <img id="upvote" src="~/Content/upvote.png"/>
+            </div>
+            <div id="voteCount" style="text-align: center;font-size: 3em;">@Model.votes</div>
+            <div>
+                <img id="downvote" src="~/Content/downvote.jpg"/>
+            </div>
+        </td>
+        <td>
+            @Model.body            
+        </td>        
+    </tr>
+    <tr>
+        <td></td>
+        <td><hr /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            @Model.tags    
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("edit","Edit","Question",new { id= Model.id},null)
+            @Html.ActionLink("delete","Delete","Question",new { id= Model.id},null)
+        </td>
+    </tr>
+</table>
+
+<div>
+
+</div>

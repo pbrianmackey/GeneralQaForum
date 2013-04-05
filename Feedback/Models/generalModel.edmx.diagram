@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19fd3744206748d6ac93506094616101" Name="Diagram1">
+        <EntityTypeShape EntityType="GeneralDbModel.Question" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralDbModel.Tag" Width="1.5" PointX="5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralDbModel.Vote" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="GeneralDbModel.FK_Vote_Question" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GeneralDbModel.Answer" Width="1.5" PointX="6.875" PointY="1.875" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

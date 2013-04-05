@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GeneralDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="GeneralDbModelStoreContainer">
+          <EntitySet Name="Answer" EntityType="GeneralDbModel.Store.Answer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Question" EntityType="GeneralDbModel.Store.Question" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tag" EntityType="GeneralDbModel.Store.Tag" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vote" EntityType="GeneralDbModel.Store.Vote" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Vote_Question" Association="GeneralDbModel.Store.FK_Vote_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="questionId" Type="int" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+          <Property Name="lastUpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="varchar(max)" Nullable="false" />
+          <Property Name="body" Type="varchar(max)" Nullable="false" />
+          <Property Name="tags" Type="varchar(max)" Nullable="false" />
+          <Property Name="votes" Type="int" />
+          <Property Name="userName" Type="varchar(max)" />
+          <Property Name="closed" Type="bit" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="lastUpdatedDate" Type="datetime" />
+          <Property Name="viewCount" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="questionId" Type="int" Nullable="false" />
+          <Property Name="upvote" Type="bit" />
+          <Property Name="userName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Vote_Question">
+          <End Role="Question" Type="GeneralDbModel.Store.Question" Multiplicity="1" />
+          <End Role="Vote" Type="GeneralDbModel.Store.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="questionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="VoteCRUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="questionId" Type="int" Mode="In" />
+          <Parameter Name="upvote" Type="bit" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GeneralDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GeneralDbEntities1" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Questions" EntityType="GeneralDbModel.Question" />
+          <EntitySet Name="Tags" EntityType="GeneralDbModel.Tag" />
+          <EntitySet Name="Votes" EntityType="GeneralDbModel.Vote" />
+          <AssociationSet Name="FK_Vote_Question" Association="GeneralDbModel.FK_Vote_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Vote" EntitySet="Votes" />
+          </AssociationSet>
+          <FunctionImport Name="VoteCRUD">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="questionId" Mode="In" Type="Int32" />
+            <Parameter Name="upvote" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Answers" EntityType="GeneralDbModel.Answer" />
+        </EntityContainer>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="body" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="tags" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="votes" Type="Int32" />
+          <Property Name="userName" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="closed" Type="Boolean" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="lastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="viewCount" Type="Int64" />
+          <NavigationProperty Name="Votes1" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Question" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="questionId" Type="Int32" Nullable="false" />
+          <Property Name="upvote" Type="Boolean" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Question" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Vote" ToRole="Question" />
+        </EntityType>
+        <Association Name="FK_Vote_Question">
+          <End Role="Question" Type="GeneralDbModel.Question" Multiplicity="1" />
+          <End Role="Vote" Type="GeneralDbModel.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="questionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="questionId" Nullable="false" />
+          <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="createDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="lastUpdateDate" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GeneralDbModelStoreContainer" CdmEntityContainer="GeneralDbEntities1">
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="GeneralDbModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="tags" ColumnName="tags" />
+                <ScalarProperty Name="votes" ColumnName="votes" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="closed" ColumnName="closed" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="lastUpdatedDate" ColumnName="lastUpdatedDate" />
+                <ScalarProperty Name="viewCount" ColumnName="viewCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="GeneralDbModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Votes">
+            <EntityTypeMapping TypeName="GeneralDbModel.Vote">
+              <MappingFragment StoreEntitySet="Vote">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="questionId" ColumnName="questionId" />
+                <ScalarProperty Name="upvote" ColumnName="upvote" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="VoteCRUD" FunctionName="GeneralDbModel.Store.VoteCRUD" />
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="GeneralDbModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="questionId" ColumnName="questionId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

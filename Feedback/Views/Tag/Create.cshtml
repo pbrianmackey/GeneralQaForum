@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using(Html.BeginForm("Create","Tag", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="tagName"/></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><textarea name="tagDescription"></textarea></td>
+        </tr>
+    </table>
+    <input type="submit" value="Create Tag"/>
+}
