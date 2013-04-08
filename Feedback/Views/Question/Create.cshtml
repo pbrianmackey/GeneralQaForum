@@ -1,0 +1,30 @@
+﻿@model Feedback.Models.Question
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script>
+    $(function() {
+        $('questionTags').change(function() {
+
+        });
+    });
+</script>
+
+<h2>Create</h2>
+
+<table>
+    <tr>
+        <td>Title</td>
+        <td><input type="text" name="questionTitle"/></td>
+    </tr>
+    <tr>
+        <td>Body</td>
+        <td><input type="text" name="questionBody"/></td>
+    </tr>
+    <tr>
+        <td>Tags</td>
+        <td><input type="text" name="questionTags" id="questionTags"/></td>
+    </tr>
+</table>

@@ -93,6 +93,5 @@ C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\bin\DotNetOpenAuth.OAut
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\bin\DotNetOpenAuth.OAuth.xml
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\bin\DotNetOpenAuth.OpenId.xml
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\obj\Debug\Feedback.csprojResolveAssemblyReference.cache
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\obj\Debug\Feedback.dll
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback\obj\Debug\Feedback.pdb

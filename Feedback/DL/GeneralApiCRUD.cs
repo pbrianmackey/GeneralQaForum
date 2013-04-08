@@ -6,14 +6,13 @@ using System.Web;
 
 namespace Feedback.DL
 {
-    public class ReportCRUD
+    public class GeneralApiCRUD
     {
         GeneralDbEntities context = new GeneralDbEntities();
 
-        public IOrderedQueryable<Question> HottestQuestions()
+        public void CreateQuestionComment(string comment)
         {
-            var result = context.Questions.OrderByDescending(q => q.votes);
-            return result;
+            
         }
     }
 }

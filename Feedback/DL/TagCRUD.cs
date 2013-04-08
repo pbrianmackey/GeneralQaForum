@@ -10,7 +10,7 @@ namespace Feedback.DL
 {
     public class TagCRUD
     {
-        GeneralDbEntities1 context = new GeneralDbEntities1();
+        GeneralDbEntities context = new GeneralDbEntities();
 
         public void Create(string name, string description)
         {

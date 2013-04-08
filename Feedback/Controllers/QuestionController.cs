@@ -43,15 +43,20 @@ namespace Feedback.Controllers
             return (int)updatedVoteCount;
         }
 
+
+        public ActionResult Create()
+        {            
+            return View();
+        }
         //
         // POST: /Question/Create
-
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
-            {          
-                int id = questionCRUD.Insert(new Question() { title = collection["qTitle"], body = collection["qBody"], tags = collection["qTags"] });
+            {
+                int id = questionCRUD.Create(new Question() 
+                { title = collection["questionTitle"], body = collection["questionBody"], tags = collection["questionTags"] });
 
                 return RedirectToAction("Index", new { id = id});
             }

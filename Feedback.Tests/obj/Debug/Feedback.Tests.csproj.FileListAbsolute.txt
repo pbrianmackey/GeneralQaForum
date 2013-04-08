@@ -32,8 +32,6 @@ C:\Users\e78590\Documents\GitHub\Feedback\Feedback\Feedback.Tests\bin\Debug\Enti
 C:\Users\e78590\Documents\GitHub\Feedback\Feedback\Feedback.Tests\obj\Debug\Feedback.Tests.csprojResolveAssemblyReference.cache
 C:\Users\e78590\Documents\GitHub\Feedback\Feedback\Feedback.Tests\obj\Debug\Feedback.Tests.dll
 C:\Users\e78590\Documents\GitHub\Feedback\Feedback\Feedback.Tests\obj\Debug\Feedback.Tests.pdb
-C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\obj\Debug\Feedback.Tests.csprojResolveAssemblyReference.cache
-C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\obj\Debug\Feedback.Tests.dll
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\Feedback.Tests.dll.config
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\Feedback.Tests.dll
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\Feedback.Tests.pdb
@@ -65,4 +63,6 @@ C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\System.
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\bin\Debug\EntityFramework.xml
+C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\obj\Debug\Feedback.Tests.csprojResolveAssemblyReference.cache
+C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\obj\Debug\Feedback.Tests.dll
 C:\Users\e78590\Documents\GitHub\GeneralQaForum\Feedback.Tests\obj\Debug\Feedback.Tests.pdb

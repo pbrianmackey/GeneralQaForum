@@ -11,14 +11,12 @@ namespace Feedback.Models
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class Answer
+    
+    public partial class AnswerComment
     {
         public int id { get; set; }
-        public int questionId { get; set; }
+        public int AnswerId { get; set; }
         public string body { get; set; }
-        public string userName { get; set; }
-        public System.DateTime createDate { get; set; }
-        public Nullable<System.DateTime> lastUpdateDate { get; set; }
+        public int commentIndex { get; set; }
     }
 }

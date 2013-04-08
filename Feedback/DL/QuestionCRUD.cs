@@ -8,9 +8,9 @@ namespace Feedback.DL
 {
     public class QuestionCRUD
     {
-        GeneralDbEntities1 context = new GeneralDbEntities1();
+        GeneralDbEntities context = new GeneralDbEntities();
 
-        public int Insert(Question q)
+        public int Create(Question q)
         {            
             context.Questions.Add(q);
             context.SaveChanges();
@@ -54,6 +54,15 @@ namespace Feedback.DL
 
             int? updatedVoteCount = context.Questions.Where(q => q.id == questionId).First().votes;
             return updatedVoteCount;
+        }
+
+        public void CreateComment(int questionId, string comment)
+        {
+            var newCommentObject = new QuestionComment();
+            newCommentObject.questionId = questionId;
+            newCommentObject.body = comment;
+            context.QuestionComments.Add(newCommentObject);
+            context.SaveChanges();
         }
     }
 }

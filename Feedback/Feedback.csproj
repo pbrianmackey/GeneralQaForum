@@ -162,12 +162,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BL\SoundExHelper.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\GeneralApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="DL\AnswerCRUD.cs" />
+    <Compile Include="DL\GeneralApiCRUD.cs" />
     <Compile Include="DL\QuestionCRUD.cs" />
     <Compile Include="DL\ReportCRUD.cs" />
     <Compile Include="DL\TagCRUD.cs" />
@@ -178,31 +181,37 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Answer.cs">
-      <DependentUpon>generalModel.tt</DependentUpon>
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\generalModel.Context.cs">
+    <Compile Include="Models\AnswerComment.cs">
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\generalDbEntites.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>generalModel.Context.tt</DependentUpon>
+      <DependentUpon>generalDbEntites.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\generalModel.cs">
+    <Compile Include="Models\generalDbEntites.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>generalModel.tt</DependentUpon>
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\generalModel.Designer.cs">
+    <Compile Include="Models\generalDbEntites.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>generalModel.edmx</DependentUpon>
+      <DependentUpon>generalDbEntites.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Question.cs">
-      <DependentUpon>generalModel.tt</DependentUpon>
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionComment.cs">
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tag.cs">
-      <DependentUpon>generalModel.tt</DependentUpon>
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vote.cs">
-      <DependentUpon>generalModel.tt</DependentUpon>
+      <DependentUpon>generalDbEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Home\IndexView.cs" />
@@ -269,22 +278,22 @@
     <Content Include="Content\upvoteActive.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\generalModel.edmx">
+    <EntityDeploy Include="Models\generalDbEntites.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>generalModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>generalDbEntites.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\generalModel.Context.tt">
+    <Content Include="Models\generalDbEntites.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>generalModel.edmx</DependentUpon>
-      <LastGenOutput>generalModel.Context.cs</LastGenOutput>
+      <DependentUpon>generalDbEntites.edmx</DependentUpon>
+      <LastGenOutput>generalDbEntites.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\generalModel.edmx.diagram">
-      <DependentUpon>generalModel.edmx</DependentUpon>
+    <Content Include="Models\generalDbEntites.edmx.diagram">
+      <DependentUpon>generalDbEntites.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\generalModel.tt">
+    <Content Include="Models\generalDbEntites.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>generalModel.edmx</DependentUpon>
-      <LastGenOutput>generalModel.cs</LastGenOutput>
+      <DependentUpon>generalDbEntites.edmx</DependentUpon>
+      <LastGenOutput>generalDbEntites.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -336,6 +345,7 @@
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Question\Edit.cshtml" />
     <Content Include="Views\Tag\Create.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GeneralDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="GeneralDbEntities1" p1:LazyLoadingEnabled="true">
+  <EntityContainer Name="GeneralDbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Answers" EntityType="GeneralDbModel.Answer" />
+    <EntitySet Name="AnswerComments" EntityType="GeneralDbModel.AnswerComment" />
     <EntitySet Name="Questions" EntityType="GeneralDbModel.Question" />
+    <EntitySet Name="QuestionComments" EntityType="GeneralDbModel.QuestionComment" />
     <EntitySet Name="Tags" EntityType="GeneralDbModel.Tag" />
     <EntitySet Name="Votes" EntityType="GeneralDbModel.Vote" />
     <AssociationSet Name="FK_Vote_Question" Association="GeneralDbModel.FK_Vote_Question">
@@ -13,10 +16,27 @@
       <Parameter Name="questionId" Mode="In" Type="Int32" />
       <Parameter Name="upvote" Mode="In" Type="Boolean" />
     </FunctionImport>
-    <EntitySet Name="Answers" EntityType="GeneralDbModel.Answer" />
-    <EntitySet Name="AnswerComments" EntityType="GeneralDbModel.AnswerComment" />
-    <EntitySet Name="QuestionComments" EntityType="GeneralDbModel.QuestionComment" />
   </EntityContainer>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="questionId" Type="Int32" Nullable="false" />
+    <Property Name="body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="AnswerComment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="AnswerId" Type="Int32" Nullable="false" />
+    <Property Name="body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="commentIndex" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="Question">
     <Key>
       <PropertyRef Name="id" />
@@ -32,6 +52,15 @@
     <Property Name="lastUpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="viewCount" Type="Int64" />
     <NavigationProperty Name="Votes1" Relationship="GeneralDbModel.FK_Vote_Question" FromRole="Question" ToRole="Vote" />
+  </EntityType>
+  <EntityType Name="QuestionComment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="questionId" Type="Int32" Nullable="false" />
+    <Property Name="body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="commentIndex" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Tag">
     <Key>
@@ -62,33 +91,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Answer">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Type="Int32" Name="id" Nullable="false" />
-    <Property Type="Int32" Name="questionId" Nullable="false" />
-    <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="userName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Type="DateTime" Name="createDate" Nullable="false" Precision="3" />
-    <Property Type="DateTime" Name="lastUpdateDate" Precision="3" />
-  </EntityType>
-  <EntityType Name="AnswerComment">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Type="Int32" Name="id" Nullable="false" />
-    <Property Type="Int32" Name="AnswerId" Nullable="false" />
-    <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="commentIndex" Nullable="false" />
-  </EntityType>
-  <EntityType Name="QuestionComment">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Type="Int32" Name="id" Nullable="false" />
-    <Property Type="Int32" Name="questionId" Nullable="false" />
-    <Property Type="String" Name="body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="commentIndex" Nullable="false" />
-  </EntityType>
 </Schema>

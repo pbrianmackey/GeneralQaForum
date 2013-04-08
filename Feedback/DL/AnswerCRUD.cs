@@ -8,11 +8,20 @@ namespace Feedback.DL
 {
     public class AnswerCRUD
     {
-        GeneralDbEntities1 context = new GeneralDbEntities1();
+        GeneralDbEntities context = new GeneralDbEntities();
 
         public void Read()
         {
-            //context
+            
+        }
+
+        public void CreateComment(int answerId, string comment)
+        {
+            var newCommentObject = new AnswerComment();
+            newCommentObject.AnswerId = answerId;
+            newCommentObject.body = comment;
+            context.AnswerComments.Add(newCommentObject);
+            context.SaveChanges();
         }
     }
 }

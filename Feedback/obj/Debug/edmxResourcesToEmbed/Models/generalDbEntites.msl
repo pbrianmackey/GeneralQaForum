@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="GeneralDbModelStoreContainer" CdmEntityContainer="GeneralDbEntities1">
+  <EntityContainerMapping StorageEntityContainer="GeneralDbModelStoreContainer" CdmEntityContainer="GeneralDbEntities">
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="GeneralDbModel.Answer">
+        <MappingFragment StoreEntitySet="Answer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnswerComments">
+      <EntityTypeMapping TypeName="GeneralDbModel.AnswerComment">
+        <MappingFragment StoreEntitySet="AnswerComment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="commentIndex" ColumnName="commentIndex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Questions">
       <EntityTypeMapping TypeName="GeneralDbModel.Question">
         <MappingFragment StoreEntitySet="Question">
@@ -14,6 +36,16 @@
           <ScalarProperty Name="createDate" ColumnName="createDate" />
           <ScalarProperty Name="lastUpdatedDate" ColumnName="lastUpdatedDate" />
           <ScalarProperty Name="viewCount" ColumnName="viewCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionComments">
+      <EntityTypeMapping TypeName="GeneralDbModel.QuestionComment">
+        <MappingFragment StoreEntitySet="QuestionComment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="commentIndex" ColumnName="commentIndex" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -36,37 +68,5 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="VoteCRUD" FunctionName="GeneralDbModel.Store.VoteCRUD" />
-    <EntitySetMapping Name="Answers">
-      <EntityTypeMapping TypeName="GeneralDbModel.Answer">
-        <MappingFragment StoreEntitySet="Answer">
-          <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
-          <ScalarProperty Name="createDate" ColumnName="createDate" />
-          <ScalarProperty Name="userName" ColumnName="userName" />
-          <ScalarProperty Name="body" ColumnName="body" />
-          <ScalarProperty Name="questionId" ColumnName="questionId" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AnswerComments">
-      <EntityTypeMapping TypeName="GeneralDbModel.AnswerComment">
-        <MappingFragment StoreEntitySet="AnswerComment">
-          <ScalarProperty Name="commentIndex" ColumnName="commentIndex" />
-          <ScalarProperty Name="body" ColumnName="body" />
-          <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="QuestionComments">
-      <EntityTypeMapping TypeName="GeneralDbModel.QuestionComment">
-        <MappingFragment StoreEntitySet="QuestionComment">
-          <ScalarProperty Name="commentIndex" ColumnName="commentIndex" />
-          <ScalarProperty Name="body" ColumnName="body" />
-          <ScalarProperty Name="questionId" ColumnName="questionId" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
