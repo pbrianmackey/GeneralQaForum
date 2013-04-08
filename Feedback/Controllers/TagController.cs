@@ -1,9 +1,11 @@
-﻿using Feedback.DL;
+﻿using Feedback.BL;
+using Feedback.DL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Feedback.Controllers
 {
@@ -12,6 +14,25 @@ namespace Feedback.Controllers
         TagCRUD tagCrud = new TagCRUD();
         //
         // GET: /Tag/
+
+
+        public string Lookup(string tagName)
+        {
+            var items = new List<TagBL>();
+            var one = new TagBL();
+            one.Name = "test";
+            one.Description = "test one";
+            items.Add(one);
+
+            var two = new TagBL();
+            two.Name = "test2";
+            two.Description = "test two";
+            items.Add(two);
+
+            var serializer = new JavaScriptSerializer();
+            var result = serializer.Serialize(items);
+            return result;
+        }
 
         public ActionResult Index()
         {

@@ -163,6 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BL\SoundExHelper.cs" />
+    <Compile Include="BL\TagBL.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\GeneralApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -310,7 +311,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="TextFile1.txt" />
+    <Content Include="Readme.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

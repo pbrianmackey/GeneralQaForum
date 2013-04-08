@@ -6,8 +6,20 @@
 
 <script>
     $(function() {
-        $('questionTags').change(function() {
-
+        $('#questionTags').change(function() {
+            $.ajax({
+                url: "/Tag/Lookup",
+                type: "GET",
+                data: {
+                    tagName: "test"
+                }
+            }).done(function (tagsFound) {                
+                var tempArray = JSON.parse(tagsFound);
+                
+                for (var i = 0; i < tempArray.length; i++) {
+                    alert(tempArray[i].Name + "::" + tempArray[i].Description);
+                }
+            });
         });
     });
 </script>
