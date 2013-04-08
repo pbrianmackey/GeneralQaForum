@@ -32,6 +32,12 @@
                 $('#voteCount').html(updatedVoteCount);
             });
         });
+
+        $("#btnAddComment").click(function () {
+            var comment = $("#txtNewComment").val();
+            $("#committedComments").append("<div>" + comment + "</div>");
+            $("#txtNewComment").val('');
+        });
         
     });
 </script>
@@ -65,7 +71,14 @@
     <tr>
         <td></td>
         <td>
-            @Model.tags    
+            <div id="committedComments"></div>
+            <div id="commentEntry"><b>Add a comment: </b>@Html.TextBox("txtNewComment") <input id="btnAddComment" name="btnAddComment" type="button" value="submit" /></div>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <b>Tags: </b>@Model.tags    
         </td>
         
     </tr>
