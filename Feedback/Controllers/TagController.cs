@@ -1,5 +1,6 @@
 ﻿using Feedback.BL;
 using Feedback.DL;
+using Feedback.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,8 @@ namespace Feedback.Controllers
 
         public string Lookup(string tagName)
         {
-            var items = new List<TagBL>();
-            var one = new TagBL();
-            one.Name = "test";
-            one.Description = "test one";
-            items.Add(one);
-
-            var two = new TagBL();
-            two.Name = "test2";
-            two.Description = "test two";
-            items.Add(two);
+            List<Tag> items = new List<Tag>();
+            items.AddRange(tagCrud.Lookup(tagName));            
 
             var serializer = new JavaScriptSerializer();
             var result = serializer.Serialize(items);

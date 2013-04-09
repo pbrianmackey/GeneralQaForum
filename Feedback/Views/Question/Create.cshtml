@@ -6,18 +6,29 @@
 
 <script>
     $(function() {
-        $('#questionTags').change(function() {
+        $('#questionTags').keyup(function() {
+            var tagNameVar = $('#questionTags').val();
             $.ajax({
                 url: "/Tag/Lookup",
                 type: "GET",
                 data: {
-                    tagName: "test"
+                    tagName: tagNameVar
                 }
             }).done(function (tagsFound) {                
                 var tempArray = JSON.parse(tagsFound);
-                
+                                                
                 for (var i = 0; i < tempArray.length; i++) {
-                    alert(tempArray[i].Name + "::" + tempArray[i].Description);
+                    //if tagName matches the Name then box should go away
+                    //if (tempArray[i].name == tagNameVar) {
+                    //    console.log('if fired');
+                    //} else {
+                    //    console.log('else fired ::' + tagNameVar);
+                    //    $('#questionTags').popover({ content: tagNameVar, trigger: 'manual' });
+                    //}
+                    //else display box                    
+                    
+                    //alert('popover fired');
+                    //alert(tempArray[i].Name + "::" + tempArray[i].Description);
                 }
             });
         });
@@ -37,6 +48,6 @@
     </tr>
     <tr>
         <td>Tags</td>
-        <td><input type="text" name="questionTags" id="questionTags"/></td>
+        <td><input type="text" name="questionTags" id="questionTags" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="Blah"/></td>
     </tr>
 </table>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -31,10 +32,13 @@ namespace Feedback.DL
                         Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
                     }
                 }
-            }
+            }   
+        }
 
-
-            
+        public IEnumerable<Tag> Lookup(string tagName)
+        {
+            var result =  context.Database.SqlQuery<Tag>("FindSimilarTags @tagName", new SqlParameter("tagName",tagName));
+            return result;
         }
     }
 }
