@@ -121,5 +121,19 @@ namespace Feedback.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public ActionResult CreateComment(int questionId, string comment)
+        {
+            try
+            {
+                questionCRUD.CreateComment(questionId, comment);
+                return RedirectToAction("Index", new { id = questionId });
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

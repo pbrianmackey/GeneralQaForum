@@ -34,8 +34,18 @@
         });
 
         $("#btnAddComment").click(function () {
-            var comment = $("#txtNewComment").val();
-            $("#committedComments").append("<div>" + comment + "</div>");
+            var commentText = $("#txtNewComment").val();
+
+            $.ajax({
+                url: "/Question/CreateComment",
+                type: "POST",
+                data: {
+                    questionId: $('#questionId').html(),
+                    comment: commentText
+                }
+            });
+
+            $("#committedComments").append("<div>" + commentText + "</div>");
             $("#txtNewComment").val('');
         });
         
