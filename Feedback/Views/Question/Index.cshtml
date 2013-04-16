@@ -49,6 +49,33 @@
             $("#txtNewComment").val('');
         });
         
+        $("#submitAnswer").click(function () {
+            var answerText = $("#body").val();
+
+            $.ajax({
+                url: "/Answer/Create",
+                type: "POST",
+                data: {
+                    questionId: $('#questionId').html(),
+                    body: answerText,
+                    userName: $('#userName').html()
+                }
+            });
+            
+        });
+        
+        function ReadAnswers() {
+            $.ajax({
+                url: "/Answer/Read",
+                type: "GET",
+                data: {
+                    questionId: $('#questionId').html(),
+                    body: answerText,
+                    userName: $('#userName').html()
+                }
+            });
+        }
+        
     });
 </script>
 
@@ -100,6 +127,17 @@
     </tr>
 </table>
 
-<div>
+<div>&nbsp;</div>
 
+<div>
+    <input id="" type="button" value="Answer Question" />
+    <div>&nbsp;</div>
+
+    <div>
+        <textarea id="body" name="body" style="width:36em;height:10em;"></textarea>
+    </div>    
+    <div>
+        <input type="submit" id="submitAnswer" value="Submit"/>
+    </div>
+    
 </div>

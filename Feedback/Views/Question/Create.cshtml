@@ -4,6 +4,21 @@
     ViewBag.Title = "Create";
 }
 
+<style>
+    .generalTextBox {
+        min-width: 50em;
+    }
+    .topOption {
+        float: left;
+        width: 33%;
+        height: 7em;
+    }
+    .bottomOption {
+        float: left;
+        width: 33%;
+        height: 7em;
+    }
+</style>
 <script>
     $(function() {
         $('#questionTags').keyup(function() {
@@ -16,17 +31,23 @@
                 }
             }).done(function (tagsFound) {                
                 var tempArray = JSON.parse(tagsFound);
-                                                
+
+                var maxIndex = 5;
                 for (var i = 0; i < tempArray.length; i++) {
+                    if (i > maxIndex)
+                        return;
                     //if tagName matches the Name then box should go away
-                    //if (tempArray[i].name == tagNameVar) {
-                    //    console.log('if fired');
-                    //} else {
-                    //    console.log('else fired ::' + tagNameVar);
-                    //    $('#questionTags').popover({ content: tagNameVar, trigger: 'manual' });
-                    //}
+                    if (tempArray[i].name == tagNameVar) {
+                        console.log('if fired');
+                        $('#tagOptions').visible('false');
+                    } else {
+                        console.log('else fired ::' + tagNameVar);
+                        $('#tagOptions').visible('true');
+                        $('#option' + i).html(tempArray[i].description);
+                        //$('#questionTags').popover({ content: tagNameVar, trigger: 'manual' });
+                    }
                     //else display box                    
-                    
+
                     //alert('popover fired');
                     //alert(tempArray[i].Name + "::" + tempArray[i].Description);
                 }
@@ -40,14 +61,27 @@
 <table>
     <tr>
         <td>Title</td>
-        <td><input type="text" name="questionTitle"/></td>
+        <td><input type="text" class="generalTextBox" name="questionTitle"/></td>
     </tr>
     <tr>
         <td>Body</td>
-        <td><input type="text" name="questionBody"/></td>
+        <td><input type="text" class="generalTextBox" name="questionBody"/></td>
     </tr>
     <tr>
         <td>Tags</td>
-        <td><input type="text" name="questionTags" id="questionTags" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="Blah"/></td>
+        <td><input type="text" class="generalTextBox" name="questionTags" id="questionTags" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div id="tagOptions">
+                <div id="option0" class="topOption">1</div>
+                <div id="option1" class="topOption">2</div>
+                <div id="option2" class="topOption">3</div>
+                <div id="option3" style="clear:both;" class="bottomOption">4</div>
+                <div id="option4" class="bottomOption">5</div>
+                <div id="option5" class="bottomOption">6</div>
+            </div>
+        </td>
     </tr>
 </table>

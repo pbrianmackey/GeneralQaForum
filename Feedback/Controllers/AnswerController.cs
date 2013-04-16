@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Feedback.DL;
+using Feedback.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +17,13 @@ namespace Feedback.Controllers
         {
 
             return View();
+        }
+
+        public IEnumerable<Answer> Read(int questionId)
+        {
+            var context = new AnswerCRUD();
+            var result = context.Read(questionId);
+            return result;
         }
 
         //
